@@ -11,7 +11,12 @@
 // <script src="/animations.js"></script>
 
 if (typeof window !== "undefined" && window.gsap) {
-  gsap.registerPlugin(ScrollTrigger, ScrambleTextPlugin, SplitText, TextPlugin);
+  gsap.registerPlugin(
+    window.ScrollTrigger,
+    window.ScrambleTextPlugin,
+    window.SplitText,
+    window.TextPlugin
+  );
 }
 
 function animateByAttribute(el, type) {
