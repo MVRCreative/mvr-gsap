@@ -37,7 +37,7 @@ function animateByAttribute(el, type) {
       }
     );
   } else if (type === "splittext") {
-    const split = new SplitText(el, { type: "words,chars" });
+    const split = new window.SplitText(el, { type: "words,chars" });
     gsap.fromTo(
       split.chars,
       { opacity: 0, y: 40 },
@@ -76,21 +76,19 @@ function animateByAttribute(el, type) {
 
 function runGsapAttributeAnimations() {
   if (typeof window === "undefined") return;
-  const map = [
-    "scrolltrigger",
-    "splittext",
-    "scrambletext",
-    "textplugin"
-  ];
-  map.forEach(type => {
-    document.querySelectorAll(`[data-gsap="${type}"]`).forEach(el => {
+  const map = ["scrolltrigger", "splittext", "scrambletext", "textplugin"];
+  map.forEach((type) => {
+    document.querySelectorAll(`[data-gsap="${type}"]`).forEach((el) => {
       animateByAttribute(el, type);
     });
   });
 }
 
 if (typeof window !== "undefined") {
-  if (document.readyState === "complete" || document.readyState === "interactive") {
+  if (
+    document.readyState === "complete" ||
+    document.readyState === "interactive"
+  ) {
     setTimeout(runGsapAttributeAnimations, 0);
   } else {
     window.addEventListener("DOMContentLoaded", runGsapAttributeAnimations);
