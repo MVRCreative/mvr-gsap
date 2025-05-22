@@ -2,14 +2,15 @@
 // This script auto-detects GSAP attributes and applies the correct animation plugin
 // No UI, no React — just pure, optimized GSAP
 
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { ScrambleTextPlugin } from "gsap/ScrambleTextPlugin";
-import { SplitText } from "gsap/SplitText";
-import { TextPlugin } from "gsap/TextPlugin";
+// To use this file, include these CDN scripts in your HTML BEFORE this file:
+// <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+// <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+// <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/SplitText.min.js"></script>
+// <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrambleTextPlugin.min.js"></script>
+// <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/TextPlugin.min.js"></script>
+// <script src="/animations.js"></script>
 
-// Register plugins
-if (typeof window !== "undefined") {
+if (typeof window !== "undefined" && window.gsap) {
   gsap.registerPlugin(ScrollTrigger, ScrambleTextPlugin, SplitText, TextPlugin);
 }
 
