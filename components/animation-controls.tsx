@@ -5,12 +5,16 @@ import { Slider } from "@/components/ui/slider"
 
 interface AnimationControlsProps {
   type: "element" | "text"
+  duration: number
+  delay: number
+  ease: string
+  onDurationChange: (value: number) => void
+  onDelayChange: (value: number) => void
+  onEaseChange: (value: string) => void
+  onPlay: () => void
 }
 
-export default function AnimationControls({ type }: AnimationControlsProps) {
-  const [duration, setDuration] = useState(1)
-  const [delay, setDelay] = useState(0)
-  const [ease, setEase] = useState("power2.out")
+export default function AnimationControls({ type, duration, delay, ease, onDurationChange, onDelayChange, onEaseChange, onPlay }: AnimationControlsProps) {
 
   const easeOptions = [
     "none",
@@ -53,19 +57,19 @@ export default function AnimationControls({ type }: AnimationControlsProps) {
       <div className="space-y-4">
         <div>
           <label className="block text-sm text-[#aaa] mb-2">Duration: {duration.toFixed(1)}s</label>
-          <Slider value={[duration]} min={0.1} max={5} step={0.1} onValueChange={(value) => setDuration(value[0])} />
+          <Slider value={[duration]} min={0.1} max={5} step={0.1} onValueChange={(value) => onDurationChange(value[0])} />
         </div>
 
         <div>
           <label className="block text-sm text-[#aaa] mb-2">Delay: {delay.toFixed(1)}s</label>
-          <Slider value={[delay]} min={0} max={3} step={0.1} onValueChange={(value) => setDelay(value[0])} />
+          <Slider value={[delay]} min={0} max={3} step={0.1} onValueChange={(value) => onDelayChange(value[0])} />
         </div>
 
         <div>
           <label className="block text-sm text-[#aaa] mb-2">Easing</label>
           <select
             value={ease}
-            onChange={(e) => setEase(e.target.value)}
+            onChange={(e) => onEaseChange(e.target.value)}
             className="w-full bg-[#0c0c0c] border border-[#333333]/30 rounded-md px-3 py-2 text-sm"
           >
             {easeOptions.map((option) => (
@@ -83,7 +87,10 @@ export default function AnimationControls({ type }: AnimationControlsProps) {
           </div>
         )}
 
-        <button className="w-full bg-[#1a1a1a] hover:bg-[#252525] text-white py-2 rounded-md transition-colors mt-2">
+        <button
+          className="w-full bg-[#1a1a1a] hover:bg-[#252525] text-white py-2 rounded-md transition-colors mt-2"
+          onClick={onPlay}
+        >
           Play Animation
         </button>
       </div>
